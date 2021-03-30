@@ -14,30 +14,30 @@ var (
 
 func main() {
 	ipArray := GetLocalIP()
-	if 0 == len(ipArray) {
+	if len(ipArray) == 0 {
 		return
 	}
 
-	localIP := ipArray[0]
+	localIP := ipArray[2]
 	device, desc := GetDeviceInfoByIP(localIP)
-	if "" == device {
+	if device == "" {
 		return
 	}
 
 	localMac := GetMacByDescription(desc)
-	if "" == localMac {
+	if localMac == "" {
 		return
 	}
 
 	srcMac := MacToByte(localMac)
 	dstMac := MacToByte(*remoteMac)
-	if 6 != len(srcMac) || 6 != len(dstMac) {
+	if len(srcMac) != 6 || len(dstMac) != 6 {
 		return
 	}
 
 	srcIP := IpToByte(localIP)
 	dstIP := IpToByte(*remoteIP)
-	if 4 != len(srcIP) || 4 != len(dstIP) {
+	if len(srcIP) != 4 || len(dstIP) != 4 {
 		return
 	}
 
